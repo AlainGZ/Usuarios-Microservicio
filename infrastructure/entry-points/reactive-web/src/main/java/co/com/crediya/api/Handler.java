@@ -2,6 +2,7 @@ package co.com.crediya.api;
 
 import co.com.crediya.model.usuario.Usuario;
 import co.com.crediya.usecase.exception.UsuarioException;
+import co.com.crediya.usecase.usuario.UsuarioConstantes;
 import co.com.crediya.usecase.usuario.UsuarioUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
@@ -27,11 +28,11 @@ public class Handler {
                 .onErrorResume(UsuarioException.class, e ->
                         ServerResponse.badRequest()
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .bodyValue(new ErrorResponse(e.getMessage(), "Validación de datos")))
+                                .bodyValue(new ErrorResponse(e.getMessage(), UsuarioConstantes.VALIDAR_DATOS)))
                 .onErrorResume(Exception.class, e ->
                         ServerResponse.status(500)
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .bodyValue(new co.com.crediya.api.ErrorResponse("Error Interno", e.getMessage())));
+                                .bodyValue(new co.com.crediya.api.ErrorResponse(UsuarioConstantes.ERROR_INTERNO, e.getMessage())));
     }
 
 

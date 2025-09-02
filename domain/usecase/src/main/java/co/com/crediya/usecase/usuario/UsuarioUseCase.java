@@ -2,6 +2,7 @@ package co.com.crediya.usecase.usuario;
 
 import co.com.crediya.model.usuario.Usuario;
 import co.com.crediya.model.usuario.gateways.UsuarioRepository;
+import co.com.crediya.usecase.exception.UsuarioException;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
@@ -20,7 +21,7 @@ public class UsuarioUseCase {
 		return usuarioRepository.existByEmail(usuario.getCorreoElectronico())
 				.flatMap(existe -> {
 					if (existe) {
-						return Mono.error(new IllegalArgumentException("El correo ya está registrado"));
+						throw new UsuarioException(UsuarioConstantes.MENSAJE_CORREO_REPETIDO);
 					}
 					return usuarioRepository.save(usuario);
 				});

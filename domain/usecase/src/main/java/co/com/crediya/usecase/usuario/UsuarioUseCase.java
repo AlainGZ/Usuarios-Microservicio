@@ -26,4 +26,8 @@ public class UsuarioUseCase {
 					return usuarioRepository.save(usuario);
 				});
 	}
+
+	public Mono<Boolean> findByDocumentoIdentidad(Long documentoIdentidad){
+		return usuarioRepository.existByDocumentoIdentidad(documentoIdentidad);
+	}
 }

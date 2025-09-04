@@ -11,4 +11,5 @@ public interface UsuarioReactiveRepository extends
 
 	Mono<UsuarioEntity> findByCorreoElectronico(String correoElectronico);
 
+	Mono<UsuarioEntity> findByDocumentoIdentidad(Long documentoIdentidad);
 }

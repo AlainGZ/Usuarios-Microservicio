@@ -7,6 +7,7 @@ public class UsuarioMapper {
 
 	public static UsuarioEntity toEntity(Usuario usuario) {
 		return UsuarioEntity.builder()
+				.documentoIdentidad(usuario.getDocumentoIdentidad())
 				.nombre(usuario.getNombre())
 				.apellido(usuario.getApellido())
 				.fechaNacimiento(usuario.getFechaNacimiento())
@@ -19,6 +20,7 @@ public class UsuarioMapper {
 
 	public static Usuario toModel(UsuarioEntity entity) {
 		Usuario usuario = new Usuario();
+		usuario.setDocumentoIdentidad(entity.getDocumentoIdentidad());
 		usuario.setNombre(entity.getNombre());
 		usuario.setApellido(entity.getApellido());
 		usuario.setFechaNacimiento(entity.getFechaNacimiento());

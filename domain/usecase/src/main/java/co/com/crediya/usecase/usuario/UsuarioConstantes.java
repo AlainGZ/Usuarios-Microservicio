@@ -4,6 +4,7 @@ public final class UsuarioConstantes {
 
 	private UsuarioConstantes(){}
 
+	public static final String MENSAJE_DOCUMENTO_OBLIGATORIO = "El campo documento de identidad es obligatorio";
 	public static final String MENSAJE_NOMBRES_OBLIGATORIO = "El campo nombres es obligatorio";
 	public static final String MENSAJE_APELLIDOS_OBLIGATORIO = "El campo apellidos es obligatorio";
 	public static final String MENSAJE_CORREO_OBLIGATORIO = "El correo electrónico es obligatorio";

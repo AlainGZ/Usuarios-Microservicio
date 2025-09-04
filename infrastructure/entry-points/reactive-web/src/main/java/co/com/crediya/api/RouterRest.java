@@ -48,9 +48,23 @@ public class RouterRest {
                                     @ApiResponse(responseCode = UsuarioConstantes.ERROR_500, description = UsuarioConstantes.ERROR_INTERNO)
                             }
                     )
+            ),
+            @RouterOperation( // 👈 Nuevo endpoint documentado
+                    path = "/api/v1/usuarios/{documentoIdentidad}",
+                    beanClass = Handler.class,
+                    beanMethod = "findUsuarioByDocumento",
+                    operation = @Operation(
+                            operationId = "findUsuarioByDocumento",
+                            summary = "Buscar usuario por documentoIdentidad",
+                            responses = {
+                                    @ApiResponse(responseCode = "200", description = "true si existe, false si no"),
+                                    @ApiResponse(responseCode = "500", description = "Error interno")
+                            }
+                    )
             )
     })
     public RouterFunction<ServerResponse> routerFunction(Handler handler) {
-       return route(POST(usuarioPath.getUsuarios()), usuarioHandler::listenSaveUsuario);
+       return route(POST(usuarioPath.getUsuarios()), usuarioHandler::listenSaveUsuario)
+               .andRoute(GET("/api/v1/usuarios/{documentoIdentidad}"), usuarioHandler::findUsuarioByDocumento);
            }
 }

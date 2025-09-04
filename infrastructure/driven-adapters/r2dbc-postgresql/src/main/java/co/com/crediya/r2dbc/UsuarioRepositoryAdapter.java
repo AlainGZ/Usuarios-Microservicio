@@ -36,7 +36,12 @@ public class UsuarioRepositoryAdapter extends ReactiveAdapterOperations<
 				.defaultIfEmpty(false);
 	}
 
-
+	@Override
+	public Mono<Boolean> existByDocumentoIdentidad(Long documentoIdentidad){
+		return repository.findByDocumentoIdentidad(documentoIdentidad)
+				.map(u -> true)
+				.defaultIfEmpty(false);
+	}
 
 
 }

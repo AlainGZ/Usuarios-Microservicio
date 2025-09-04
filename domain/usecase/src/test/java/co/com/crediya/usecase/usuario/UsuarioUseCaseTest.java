@@ -25,6 +25,7 @@ public class UsuarioUseCaseTest {
 
 	private Usuario buildUsuario() {
 		Usuario usuario = new Usuario();
+		usuario.setDocumentoIdentidad(123456789L);
 		usuario.setNombre("Juan");
 		usuario.setApellido("Pérez");
 		usuario.setFechaNacimiento(LocalDate.of(2000,1, 1));

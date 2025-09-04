@@ -10,6 +10,7 @@ public class UsuarioValidator {
 		validarApellido(usuario.getApellido());
 		validarCorreo(usuario.getCorreoElectronico());
 		validarSalario(usuario.getSalarioBase());
+		validarDocumento(usuario.getDocumentoIdentidad());
 	}
 
 	private static void validarNombre(String nombres) {
@@ -17,7 +18,11 @@ public class UsuarioValidator {
 			throw new UsuarioException(UsuarioConstantes.MENSAJE_NOMBRES_OBLIGATORIO);
 		}
 	}
-
+	private static void validarDocumento(Long documento) {
+		if (documento == null || documento < 0) {
+			throw new UsuarioException(UsuarioConstantes.MENSAJE_DOCUMENTO_OBLIGATORIO);
+		}
+	}
 	private static void validarApellido(String apellidos) {
 		if (apellidos == null || apellidos.isBlank()) {
 			throw new UsuarioException(UsuarioConstantes.MENSAJE_APELLIDOS_OBLIGATORIO);

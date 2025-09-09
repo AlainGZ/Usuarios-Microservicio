@@ -1,5 +1,7 @@
 package co.com.crediya.api.security;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -32,5 +34,16 @@ public class JwtUtil {
 				.parseClaimsJws(token)
 				.getBody()
 				.get("rol");
+	}
+	public static boolean validateToken(String token) {
+		try {
+			Jwts.parserBuilder()
+					.setSigningKey(key)
+					.build()
+					.parseClaimsJws(token); // Si falla lanza excepción
+			return true;
+		} catch (JwtException | IllegalArgumentException e) {
+			return false;
+		}
 	}
 }

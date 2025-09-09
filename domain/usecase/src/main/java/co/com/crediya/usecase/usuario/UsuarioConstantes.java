@@ -16,6 +16,9 @@ public final class UsuarioConstantes {
 	public static final String VALIDAR_DATOS = "Error de Validacion de Datos";
 	public static final String OK = "Usuario registrado exitosamente";
 
+	public static final String USUARIO_NO_ENCONTRADO = "Usuario no encontrado";
+	public static final String CLAVE_INCORRECTA = "Clave Incorrecta";
+
 	public static final String TITULO = "CrediYa - Registro de Usuarios";
 	public static final String VERSION = "1.0";
 	public static final String DESCRIPCION = "Documentación de la API de Usuarios con WebFlux y Clean Architecture";

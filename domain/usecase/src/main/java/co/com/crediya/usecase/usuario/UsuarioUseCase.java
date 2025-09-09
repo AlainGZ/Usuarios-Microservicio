@@ -30,4 +30,15 @@ public class UsuarioUseCase {
 	public Mono<Boolean> findByDocumentoIdentidad(Long documentoIdentidad){
 		return usuarioRepository.existByDocumentoIdentidad(documentoIdentidad);
 	}
+
+	public Mono<Usuario> login(String correo, String clave){
+		return usuarioRepository.findByEmail(correo)
+				.switchIfEmpty(Mono.error(new UsuarioException(UsuarioConstantes.USUARIO_NO_ENCONTRADO)))
+				.flatMap(usuario -> {
+					if (!usuario.getClave().equals(clave)){
+						return Mono.error(new UsuarioException(UsuarioConstantes.CLAVE_INCORRECTA));
+					}
+					return Mono.just(usuario);
+				});
+	}
 }

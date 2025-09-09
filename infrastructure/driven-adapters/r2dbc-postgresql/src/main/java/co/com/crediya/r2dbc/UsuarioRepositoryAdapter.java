@@ -43,5 +43,9 @@ public class UsuarioRepositoryAdapter extends ReactiveAdapterOperations<
 				.defaultIfEmpty(false);
 	}
 
-
+	@Override
+	public Mono<Usuario> findByEmail(String correo){
+		return repository.findByCorreoElectronico(correo)
+				.map(entity -> mapper.map(entity, Usuario.class));
+	}
 }

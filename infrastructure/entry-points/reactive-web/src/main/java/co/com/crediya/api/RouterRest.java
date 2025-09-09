@@ -49,7 +49,7 @@ public class RouterRest {
                             }
                     )
             ),
-            @RouterOperation( // 👈 Nuevo endpoint documentado
+            @RouterOperation(
                     path = "/api/v1/usuarios/{documentoIdentidad}",
                     beanClass = Handler.class,
                     beanMethod = "findUsuarioByDocumento",
@@ -61,10 +61,28 @@ public class RouterRest {
                                     @ApiResponse(responseCode = "500", description = "Error interno")
                             }
                     )
+            ),
+            @RouterOperation(
+                    path = "/api/v1/login",
+                    beanClass = Handler.class,
+                    beanMethod = "login",
+                    operation = @Operation(
+                            operationId = "login",
+                            summary = "Logear con correo y clave",
+                            requestBody = @RequestBody(
+                                    required = true,
+                                    content = @Content(schema = @Schema(implementation = Usuario.class))
+                            ),
+                            responses = {
+                                    @ApiResponse(responseCode = "200", description = "Si se logea con exito"),
+                                    @ApiResponse(responseCode = "500", description = "Error interno")
+                            }
+                    )
             )
     })
     public RouterFunction<ServerResponse> routerFunction(Handler handler) {
        return route(POST(usuarioPath.getUsuarios()), usuarioHandler::listenSaveUsuario)
-               .andRoute(GET("/api/v1/usuarios/{documentoIdentidad}"), usuarioHandler::findUsuarioByDocumento);
+               .andRoute(GET("/api/v1/usuarios/{documentoIdentidad}"), usuarioHandler::findUsuarioByDocumento)
+               .andRoute(POST("/api/v1/login"), usuarioHandler::login);
            }
 }

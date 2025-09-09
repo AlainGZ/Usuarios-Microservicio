@@ -1,6 +1,7 @@
 package co.com.crediya.r2dbc.entity;
 
 
+import co.com.crediya.model.usuario.Rol;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -29,4 +30,8 @@ public class UsuarioEntity {
 	private String correoElectronico;
 	@Column("salario_base")
 	private Long salarioBase;
+
+	private String clave;
+	@Column("rol")
+	private Rol rol;
 }

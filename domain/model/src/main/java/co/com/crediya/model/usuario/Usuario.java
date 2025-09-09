@@ -20,4 +20,6 @@ public class Usuario {
 	private String correoElectronico;
 	private Long salarioBase;
 
+	private String clave;
+	private Rol rol;
 }

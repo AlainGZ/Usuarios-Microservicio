@@ -15,6 +15,8 @@ public class UsuarioMapper {
 				.telefono(usuario.getTelefono())
 				.correoElectronico(usuario.getCorreoElectronico())
 				.salarioBase(usuario.getSalarioBase())
+				.clave(usuario.getClave())
+				.rol(usuario.getRol())
 				.build();
 	}
 
@@ -28,6 +30,8 @@ public class UsuarioMapper {
 		usuario.setTelefono(entity.getTelefono());
 		usuario.setCorreoElectronico(entity.getCorreoElectronico());
 		usuario.setSalarioBase(entity.getSalarioBase());
+		usuario.setClave(entity.getClave());
+		usuario.setRol(entity.getRol());
 		return usuario;
 	}
 }

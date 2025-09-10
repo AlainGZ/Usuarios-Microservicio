@@ -1,8 +1,7 @@
 package co.com.crediya.api.security;
 
-import io.jsonwebtoken.Claims;
+
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -19,7 +18,10 @@ public class JwtAuthenticationFilter implements WebFilter {
 		String path = exchange.getRequest().getURI().getPath();
 
 
-		if (path.startsWith("/api/v1/login")) {
+		if (path.startsWith("/swagger") ||
+				path.startsWith("/v3/api-docs") ||
+				path.startsWith("/webjars") ||
+				path.equals("/api/v1/login")) {
 			return chain.filter(exchange);
 		}
 

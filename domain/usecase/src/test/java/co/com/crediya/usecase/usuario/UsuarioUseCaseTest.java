@@ -43,7 +43,7 @@ public class UsuarioUseCaseTest {
 		when(usuarioRepository.existByEmail(usuario.getCorreoElectronico())).thenReturn(Mono.just(false));
 		when(usuarioRepository.save(any(Usuario.class))).thenReturn(Mono.just(usuario));
 
-		StepVerifier.create(usuarioUseCase.ejecutar(usuario))
+		StepVerifier.create(usuarioUseCase.save(usuario))
 				.expectNext(usuario)
 				.verifyComplete();
 
@@ -56,7 +56,7 @@ public class UsuarioUseCaseTest {
 
 		when(usuarioRepository.existByEmail(usuario.getCorreoElectronico())).thenReturn(Mono.just(true));
 
-		StepVerifier.create(usuarioUseCase.ejecutar(usuario))
+		StepVerifier.create(usuarioUseCase.save(usuario))
 				.expectErrorMatches(throwable ->
 						throwable instanceof IllegalArgumentException &&
 								throwable.getMessage().equals("El correo ya está registrado"))

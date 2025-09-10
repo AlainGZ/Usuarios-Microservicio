@@ -40,7 +40,7 @@ public class JwtUtil {
 			Jwts.parserBuilder()
 					.setSigningKey(key)
 					.build()
-					.parseClaimsJws(token); // Si falla lanza excepción
+					.parseClaimsJws(token);
 			return true;
 		} catch (JwtException | IllegalArgumentException e) {
 			return false;

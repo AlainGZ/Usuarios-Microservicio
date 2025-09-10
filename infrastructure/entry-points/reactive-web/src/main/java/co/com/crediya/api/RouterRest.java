@@ -30,54 +30,19 @@ public class RouterRest {
     @Bean
     @RouterOperations({
             @RouterOperation(
-                    path = UsuarioConstantes.ROUTER_PATH,
+                    path = "/api/v1/usuarios",
                     beanClass = Handler.class,
-                    beanMethod = UsuarioConstantes.ROUTER_BEANMETHOD,
-                    operation = @Operation(
-                            operationId = UsuarioConstantes.ROUTER_OPERATIONID,
-                            summary = UsuarioConstantes.FUNCION_DESCRITA,
-                            requestBody = @RequestBody(
-                                    required = true,
-                                    content = @Content(schema = @Schema(implementation = Usuario.class))
-                            ),
-                            responses = {
-                                    @ApiResponse(responseCode = UsuarioConstantes.ERROR_200, description = UsuarioConstantes.OK,
-                                            content = @Content(schema = @Schema(implementation = Usuario.class))),
-                                    @ApiResponse(responseCode = UsuarioConstantes.ERROR_400, description = UsuarioConstantes.VALIDAR_DATOS),
-                                    @ApiResponse(responseCode = UsuarioConstantes.ERROR_409, description = UsuarioConstantes.MENSAJE_CORREO_REPETIDO),
-                                    @ApiResponse(responseCode = UsuarioConstantes.ERROR_500, description = UsuarioConstantes.ERROR_INTERNO)
-                            }
-                    )
+                    beanMethod = "listenSaveUsuario"
             ),
             @RouterOperation(
                     path = "/api/v1/usuarios/{documentoIdentidad}",
                     beanClass = Handler.class,
-                    beanMethod = "findUsuarioByDocumento",
-                    operation = @Operation(
-                            operationId = "findUsuarioByDocumento",
-                            summary = "Buscar usuario por documentoIdentidad",
-                            responses = {
-                                    @ApiResponse(responseCode = "200", description = "true si existe, false si no"),
-                                    @ApiResponse(responseCode = "500", description = "Error interno")
-                            }
-                    )
+                    beanMethod = "findUsuarioByDocumento"
             ),
             @RouterOperation(
                     path = "/api/v1/login",
                     beanClass = Handler.class,
-                    beanMethod = "login",
-                    operation = @Operation(
-                            operationId = "login",
-                            summary = "Logear con correo y clave",
-                            requestBody = @RequestBody(
-                                    required = true,
-                                    content = @Content(schema = @Schema(implementation = Usuario.class))
-                            ),
-                            responses = {
-                                    @ApiResponse(responseCode = "200", description = "Si se logea con exito"),
-                                    @ApiResponse(responseCode = "500", description = "Error interno")
-                            }
-                    )
+                    beanMethod = "login"
             )
     })
     public RouterFunction<ServerResponse> routerFunction(Handler handler) {

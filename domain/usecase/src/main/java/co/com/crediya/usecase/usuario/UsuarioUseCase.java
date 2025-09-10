@@ -13,7 +13,7 @@ public class UsuarioUseCase {
 
 
 
-	public Mono<Usuario> ejecutar(Usuario usuario) {
+	public Mono<Usuario> save(Usuario usuario) {
 
 		UsuarioValidator.validar(usuario);
 
@@ -21,7 +21,7 @@ public class UsuarioUseCase {
 		return usuarioRepository.existByEmail(usuario.getCorreoElectronico())
 				.flatMap(existe -> {
 					if (existe) {
-						throw new UsuarioException(UsuarioConstantes.MENSAJE_CORREO_REPETIDO);
+						return Mono.error(new UsuarioException(UsuarioConstantes.MENSAJE_CORREO_REPETIDO));
 					}
 					return usuarioRepository.save(usuario);
 				});
